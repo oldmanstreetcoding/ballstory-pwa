@@ -1,0 +1,80 @@
+<!-- Sticky Top Horizontal Line Loader -->
+<section class="progress" id="ligaLoader">
+    <div class="indeterminate"></div>
+</section>
+
+<article class="row" id="boxmainmodal">
+    <!-- Close Modal -->
+    <div class="btnclosemodal right-align">
+        <img style="width:20px;cursor: pointer;margin-right:10px;" src="../../assets/icons/exit.svg" alt="X"/>
+    </div>
+
+    <!-- Card Profil Liga -->
+    <section class="col s12 m12 l3" id="boxprofil">
+        <div class="card-panel card-border center-align" id="boxavatar">
+            <h5 class="teal-text"><b>Country</b></h5>
+            <img id="imgavaliga" class="" src="assets/icons/league.svg" alt="Liga"/>
+            <div>
+                <a title="Subscribe For Latest League Info" class="btn-floating btn-large teal pulse">
+                    <img class="imglove" src="../../assets/icons/heart.svg" alt=""/>
+                </a>
+            </div>
+            <p class="teal-text">
+                Current Session<br>
+                0 Matches<br>
+                Duration
+            </p>
+        </div>
+    </section>
+
+    <section class="col s12 m12 l9" id="boxdetilliga">
+
+        <!-- Tab Navigation -->
+        <div class="col s12 card-panel card-border">
+            <ul class="tabs">
+                <li class="tab col s4 tabprofil" id="standings" title="Info Klasemen Liga">
+                    <a href="#leagues" class="active">
+                        <div class="row">
+                            <div class="col s12 center-align hide-on-med-and-up">
+                                <img class="imgtabicon" src="../../assets/icons/stadium.svg"/>
+                            </div>
+                            <div class="col m12 center-align hide-on-small-only">
+                                STANDINGS
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tab col s4 tabprofil" id="matches" title="Info Skor Pertandingan">
+                    <a href="#leagues">
+                        <div class="row">
+                            <div class="col s12 center-align hide-on-med-and-up">
+                                <img class="imgtabicon" src="../../assets/icons/match.svg"/>
+                            </div>
+                            <div class="col m12 center-align hide-on-small-only">
+                                MATCHES
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="tab col s4 tabprofil" id="scorers" title="Top Skor Liga">
+                    <a href="#leagues">
+                        <div class="row">
+                            <div class="col s12 center-align hide-on-med-and-up">
+                                <img class="imgtabicon" src="../../assets/icons/topscore.svg"/>
+                            </div>
+                            <div class="col m12 center-align hide-on-small-only">
+                                TOP SCORE
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Card Standing, Match & Top Scorer -->
+        <div class="col s12 card-panel card-border center-align" id="boxsubprofildetil">
+            <h6 class="teal-text">... Loading ...</h6>
+        </div>
+        
+    </section>
+</article>

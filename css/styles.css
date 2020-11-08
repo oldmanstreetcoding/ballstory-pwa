@@ -1,0 +1,287 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#boxoverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+#textoverlay {
+    margin-top: 400px;
+}
+
+.boxliga {
+    height: 180px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.imgliga {
+    height: 100%;
+    width: 100%;
+}
+
+.judul-halaman{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+#tblh2h {
+    margin-bottom: 20px;
+    margin-top: -25px;
+}
+
+#ligaLoader {
+    display: none;
+    margin-top: 1px;
+}
+
+#boxmainmodal {
+    padding: 15px;
+}
+
+#text-greeting {
+    font-size: 4vw;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+#text-greeting2 {
+    font-size: 20px;
+}
+
+#box-heroimage {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.imglovematches {
+    width: 20px;
+}
+
+.boxspark:hover {  
+    box-shadow: 0 0 2px 3px salmon;
+    cursor: pointer;
+}
+
+#boxmapchart {
+    margin-top: 20px;
+}
+
+.boxfavorite {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.text-titlefav {
+    margin-top: 0px;
+}
+
+.boxisifavorite {
+    height: 42vh;
+    overflow-y: scroll;
+    padding: 0px 10px 10px 10px;
+}
+
+.imglogo {
+    width: 40px;
+    margin-top: 12px;
+}
+
+.titlefiture {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#boxfiture {
+    margin-bottom: 70px;
+    padding: 10px;
+}
+
+#imgmenu {
+    width: 30px;
+    margin-top: 15px;
+}
+
+#sidemenu-title {
+    color: black;
+    margin-left: 8px;
+    margin-top: 20px;
+    font-weight: bolder;
+}
+
+.boxdelfav {
+    margin-bottom: 10px;
+}
+
+.btn-nav {
+    font-size: 16px;
+}
+
+.btn-active, .btn-nav:hover, .btnothermatch:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btndetilkompetisi:hover, .btndetilteam:hover, .btndetilpemain:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sidenav {
+    padding: 10px;
+}
+
+#boxsidemenu {
+    border: 1px solid salmon;
+    padding: 0px 20px 20px 20px;
+    border-radius: 5px;
+    color: teal;
+    font-weight: bold;
+}
+
+#imgavatar {
+    width: 50%;
+}
+
+.imgfiture {
+    width: 40%;
+}
+
+.dvd-menu {
+    border: 1px dashed grey;
+    margin-left: 0px;
+}
+
+#imgfab {
+    width: 40px;
+    margin-top: 8px;
+}
+
+.icon-float {
+    width: 22px;
+    margin-right: 10px;
+    margin-top: 8px;
+}
+
+#boxlistliga {
+    margin-bottom: 50px;
+}
+
+#goTop {
+    display: none; 
+    position: fixed; 
+    bottom: 83px; 
+    right: 23px; 
+    z-index: 99; 
+    border: none; 
+    outline: none; 
+    background-color: #d81b60; 
+    color: white; 
+    cursor: pointer; 
+    padding: 15px; 
+    border-radius: 50%; 
+    font-size: 20px;
+    opacity: 1;
+}
+  
+#goTop:hover {
+    background-color: #555; 
+}
+
+.icon-up {
+    width: 25px;
+    margin-bottom: 10px;
+}
+
+.imglastmatch {
+    width: 20px;
+    margin-right: 5px;
+}
+
+#boxsubprofildetil {
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 15px;
+}
+
+.imgtabicon {
+    width: 25px;
+    margin-top: 10px;
+}
+
+.table-bordered {
+    border: 1px solid #e0e0e0;
+}
+
+.tblLiga {
+    margin-bottom: 10px;
+}
+
+footer {
+    font-size: 16px;
+    font-weight: bolder;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.modal { 
+    margin-top: -55px;
+    width: 90% !important; 
+    max-height: 95% !important;
+}
+
+#imgavaliga {
+    width: 40%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.imgavafav {
+    width: 30%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.boxhfav {
+    height: 350px;
+}
+
+.imglove {
+    width: 30px;
+    margin-top: 15px;
+}
+
+#boxavatar {
+    margin-top: 10px;
+    padding:10px;
+}
+
+@media screen and (max-width: 400px) {
+    #text-greeting {
+        font-size: 20px;
+    }
+
+    #text-greeting2 {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <title>BallStory</title>
+
+        <link rel="shortcut icon" href="assets/icons/applogo.svg">
+        <link rel="apple-touch-icon" href="/icon-apple.png">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"/>
+        <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#00897B"/>
+        <meta name="description" content="Web Aplikasi Update Info Pertandingan Sepakbola Eropa"/>
+        <meta name="author" content="Ahmad Furqan"/>
+
+    </head>
+    <body>
+
+        <!-- App Header -->
+        <header>
+            
+            <!-- Navigation Bar on Tablet & Desktop Display -->
+            <div class="navbar-fixed">
+                <nav class="teal darken-1" role="navigation">
+                    <div class="container">
+                        <a href="/" class="brand-logo">
+                            <img class="hide-on-med-and-down imglogo" src="assets/icons/applogo.svg" id="imglogo" alt="Logo"/> <b>BallStory</b>
+                        </a>
+                        
+                        <a href="#" data-target="nav-mobile" class="sidenav-trigger">
+                            <img src="assets/icons/applogo.svg" id="imgmenu" alt="Menu"/>
+                        </a>
+        
+                        <ul class="right hide-on-med-and-down">
+                            <li><a class="waves-effect btn-nav btn-active" href="#home"><b>Home</b></a></li>
+                            <li><a class="waves-effect btn-nav" href="#leagues"><b>Leagues</b></a></li>
+                            <li><a class="waves-effect btn-nav" href="#mypages"><b>MyPages</b></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Sidebar Navigation on Mobile Display -->
+            <aside>
+                <div class="sidenav center-align" id="nav-mobile">
+                    <div class="card-panel card-border teal lighten-5 boxspark" id="boxsidemenu">
+                        <h4>BallStory</h4>
+                        <img src="assets/icons/applogo.svg" id="imgavatar" alt="Avatar"/>
+                        <p>Versi 1.0</p>
+                        <hr class="dvd-menu">
+                        <p><a class="waves-effect btn-nav btn-active" href="#home"><b>Home</b></a></p>
+                        <hr class="dvd-menu">
+                        <p><a class="waves-effect btn-nav" href="#leagues"><b>Leagues</b></a></p>
+                        <hr class="dvd-menu">
+                        <p><a class="waves-effect btn-nav" href="#mypages"><b>MyPages</b></a></p>
+                        <hr class="dvd-menu">
+                    </div>
+                </div>
+            </aside>
+
+        </header>
+
+        <!-- App Main Content -->
+        <main id="body-content"></main>
+        
+        <!-- Circle Loader -->
+        <div id="boxoverlay">
+            <div class="center-align" id="textoverlay">
+                <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-red-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Footer -->
+        <footer class="teal darken-1 center-align">
+            BallStory &#169; 2020 &middot; StreetCoding
+        </footer>
+        
+        <!-- Scroll Up Button -->
+        <a id="goTop" title="Klik untuk Navigasi ke Atas" class="btn-large red">
+            <img src="assets/icons/up-arrow.svg" class="icon-up" alt="UP"/>
+        </a>
+
+        <!-- Floating Action Button -->
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large hide-on-large-only red" href="#">
+                <img src="assets/icons/ball.svg" class="icon-menu" id="imgfab" alt="Menu"/>
+            </a>
+            <ul>
+                <li title="mypages">
+                    <a class="btn-floating blue btn-nav" href="#mypages">
+                        <img src="assets/icons/player.svg" class="icon-float" alt="mypages"/>
+                    </a>
+                </li>
+                <li title="leagues">
+                    <a class="btn-floating yellow btn-nav" href="#leagues">
+                        <img src="assets/icons/league.svg" class="icon-float" alt="leagues"/>
+                    </a>
+                </li>
+                <li title="home">
+                    <a class="btn-floating green btn-nav" href="#home">
+                        <img src="assets/icons/stadium.svg" class="icon-float" alt="home"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Box Modal untuk Menampilkan Detil Liga -->
+        <section class="modal" id="boxmodal"></section>
+
+        <!-- Third Party JS Library -->
+        <script src="js/vendor/materialize/materialize.min.js"></script>
+        <script src="js/vendor/amChart/core.js"></script>
+        <script src="js/vendor/amChart/maps.js"></script>
+        <script src="js/vendor/amChart/bullets.js"></script>
+        <script src="js/vendor/amChart/europeHigh.js"></script>
+        <script src="js/vendor/idb/idb.js"></script>
+
+        <script src="js/ceksw.js"></script>
+        <script src="js/app.js" type="module"></script>
+
+    </body>
+</html>

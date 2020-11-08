@@ -1,0 +1,18 @@
+{
+    "name": "Welcome Ball Story Lover",
+    "short_name": "BallStory",
+    "description": "Aplikasi PWA Info Sepakbola Eropa untuk Memenuhi Submission Kedua Dicoding Course",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#00897B",
+    "theme_color": "#00897B",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "gcm_sender_id": "708140887117"
+}
