@@ -6,8 +6,8 @@
 /* eslint-disable import/extensions */
 import SumberData from '../data.js';
 import Utils from '../utils.js';
-import loadLeagueDetil from './leaguedetil.js';
-import loadPlayerDetil from './playerdetil.js';
+import leagueDetil from './leaguedetil.js';
+import playerDetil from './playerdetil.js';
 import loadMatchDetil from './matchdetil.js';
 import inDB from '../indb.js';
 
@@ -119,7 +119,7 @@ const writeTeamInfoHtml = (data, info) => {
 
         Utils.getDetil('btndetilteam', loadTeamDetil, true);
     } else {
-        Utils.getDetil('btndetilpemain', loadPlayerDetil);
+        Utils.getDetil('btndetilpemain', playerDetil.loadPlayerDetil);
     }
 };
 
@@ -157,49 +157,68 @@ const getTeamInfoData = (idteam, info) => {
 };
 
 const writeTeamProfilHtml = (teams) => {
-    let activecomp = '<ul class="collection">';
-    teams.activeCompetitions.map((team) => {
-        let btnliga = '';
-        if (Utils.idLiga.indexOf(team.id) >= 0) {
-            btnliga = 'btndetilkompetisi';
-        } else {
-            btnliga = '';
+    const writeHtml = (data, cekexist) => {
+        let activecomp = '<ul class="collection">';
+        data.activeCompetitions.map((team) => {
+            let btnliga = '';
+            if (Utils.idLiga.indexOf(team.id) >= 0) {
+                btnliga = 'btndetilkompetisi';
+            } else {
+                btnliga = '';
+            }
+            activecomp += `<li class="teal-text collection-item ${btnliga}" id="tx${team.id}">${team.name}</li>`;
+        });
+
+        activecomp += '</ul>';
+
+        let situsklub = '';
+        if (data.website !== null) {
+            situsklub = `<a href="${data.website}" target="_blank">${data.website}</a>`;
         }
-        activecomp += `<li class="teal-text collection-item ${btnliga}" id="tx${team.id}">${team.name}</li>`;
-    });
 
-    activecomp += '</ul>';
+        let btnfav = '';
+        if (cekexist > 0) {
+            btnfav = `<a title="Unsubscribe Info Terupdate Team" class="btn-floating btn-large red pulse favclass btnhapusfavteam" id="cx${data.id}">
+                        <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
+                    </a>`;
+        } else {
+            btnfav = `<a title="Subscribe Info Terupdate Team" class="btn-floating btn-large teal pulse favclass" id="dxKlub">
+                        <img class="imglove" src="../../assets/icons/heart.svg" alt=""/>
+                    </a>`;
+        }
 
-    let situsklub = '';
-    if (teams.website !== null) {
-        situsklub = `<a href="${teams.website}" target="_blank">${teams.website}</a>`;
-    }
+        const profilHtml = `<div class="card-panel card-border center-align" id="boxavatar">
+                                <h5 class="teal-text"><b>${data.name}</b></h5>
+                                <img id="imgavaliga" class="" src="${data.crestUrl}" alt="${data.name}"/>
+                                <div>
+                                    ${btnfav}
+                                </div>
+                                <p>
+                                    <small>
+                                        ${data.venue}<br>
+                                        ${data.address}<br>
+                                        ${data.phone}<br>
+                                        ${data.email}<br>
+                                        ${situsklub}
+                                    </small>
+                                    ${activecomp}
+                                </p>
+                            </div>`;
 
-    const profilHtml = `<div class="card-panel card-border center-align" id="boxavatar">
-                            <h5 class="teal-text"><b>${teams.name}</b></h5>
-                            <img id="imgavaliga" class="" src="${teams.crestUrl}" alt="${teams.name}"/>
-                            <div>
-                                <a title="Subscribe Info Terupdate Team" class="btn-floating btn-large teal pulse favclass" id="dxKlub">
-                                    <img class="imglove" src="../../assets/icons/heart.svg" alt=""/>
-                                </a>
-                            </div>
-                            <p>
-                                <small>
-                                    ${teams.venue}<br>
-                                    ${teams.address}<br>
-                                    ${teams.phone}<br>
-                                    ${teams.email}<br>
-                                    ${situsklub}
-                                </small>
-                                ${activecomp}
-                            </p>
-                        </div>`;
+        document.getElementById('boxprofil').innerHTML = profilHtml;
 
-    document.getElementById('boxprofil').innerHTML = profilHtml;
+        Utils.getDetil('btndetilkompetisi', leagueDetil.loadLeagueDetil);
 
-    Utils.getDetil('btndetilkompetisi', loadLeagueDetil);
+        if (cekexist > 0) {
+            inDB.hapusFavourite('btnhapusfavteam', 'Klub');
+        } else {
+            inDB.saveMyFavorite('favclass', data);
+        }
+    };
 
-    inDB.saveMyFavorite('favclass', teams);
+    // Sandingkan data indexedDB dan data API untuk menentukan tombol favorite
+    inDB.ambilIndexDB('Klub')
+        .then((dataclubs) => writeHtml(teams, inDB.indbVsApi(dataclubs, teams)));
 };
 
 const loadTeamDetil = (idteam) => {
@@ -244,6 +263,7 @@ const loadTeamDetil = (idteam) => {
 const clubDetil = {
     loadTeamDetil,
     writeTeamInfoHtml,
+    writeTeamProfilHtml,
 };
 
 export default clubDetil;

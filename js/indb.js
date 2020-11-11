@@ -1,9 +1,16 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-cycle */
 /* eslint-disable radix */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
+
+import leagueDetil from './component/leaguedetil.js';
+import clubDetil from './component/clubdetil.js';
+import playerDetil from './component/playerdetil.js';
 
 // Buka koneksi ke IndexedDB dan buat 4 Object Storage
 const dbPromised = idb.open('ballstory-indb', 1, (upgradeDb) => {
@@ -52,6 +59,13 @@ const myFavorite = (os, data) => {
 
             M.toast({ html: msg });
             console.log(msg);
+            if (os === 'Liga') {
+                leagueDetil.writeLeagueProfilHtml(data);
+            } else if (os === 'Klub') {
+                clubDetil.writeTeamProfilHtml(data);
+            } else if (os === 'Pemain') {
+                playerDetil.writePlayerProfilHtml(data);
+            }
         });
 };
 
@@ -105,10 +119,23 @@ const hapusFavourite = (dclass, os) => {
     }
 };
 
+// Fungsi untuk cek apakah data API sudah ada di IndexedDB
+const indbVsApi = (indbs, apis) => {
+    let x = 0;
+    indbs.map((indb) => {
+        if (indb.id === apis.id) {
+            x++;
+        }
+    });
+
+    return x;
+};
+
 const inDB = {
     saveMyFavorite,
     ambilIndexDB,
     hapusFavourite,
+    indbVsApi,
 };
 
 export default inDB;

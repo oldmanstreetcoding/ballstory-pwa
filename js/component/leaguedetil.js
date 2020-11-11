@@ -9,7 +9,7 @@
 /* eslint-disable import/extensions */
 import SumberData from '../data.js';
 import Utils from '../utils.js';
-import loadPlayerDetil from './playerdetil.js';
+import playerDetil from './playerdetil.js';
 import clubDetil from './clubdetil.js';
 import loadMatchDetil from './matchdetil.js';
 import inDB from '../indb.js';
@@ -225,7 +225,7 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
             });
         }
     } else if (info === 'scorers') {
-        Utils.getDetil('btndetilpemain', loadPlayerDetil);
+        Utils.getDetil('btndetilpemain', playerDetil.loadPlayerDetil);
     }
 
     Utils.getDetil('btndetilteam', clubDetil.loadTeamDetil, true);
@@ -267,24 +267,43 @@ const getLeagueInfoData = (id, info = '', idmatch = null) => {
 };
 
 const writeLeagueProfilHtml = (profil) => {
-    const profilHtml = `<div class="card-panel card-border center-align" id="boxavatar">
-                            <h5 class="teal-text"><b>${profil.area.name}</b></h5>
-                            <img id="imgavaliga" class="" src="assets/images/${profil.id}.png" alt="${profil.name}"/>
+    const writeHtml = (data, cekexist) => {
+        let btnfav = '';
+        if (cekexist > 0) {
+            btnfav = `<a title="Unsubscribe Info Terupdate Liga" class="btn-floating btn-large red pulse favclass btnhapusfavliga" id="lx${data.id}">
+                        <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
+                    </a>`;
+        } else {
+            btnfav = `<a title="Subscribe Info Terupdate Liga" class="btn-floating btn-large teal pulse favclass" id="dxLiga">
+                        <img class="imglove" src="../../assets/icons/heart.svg" alt=""/>
+                    </a>`;
+        }
+
+        const profilHtml = `<div class="card-panel card-border center-align" id="boxavatar">
+                            <h5 class="teal-text"><b>${data.area.name}</b></h5>
+                            <img id="imgavaliga" class="" src="assets/images/${data.id}.png" alt="${data.name}"/>
                             <div>
-                                <a title="Subscribe Info Terupdate Liga" class="btn-floating btn-large teal pulse favclass" id="dxLiga">
-                                    <img class="imglove" src="../../assets/icons/heart.svg" alt=""/>
-                                </a>
+                            ${btnfav}
                             </div>
-                            <p class="teal-text">
-                                <b>Current Session</b><br>
-                                <span class="currmatch" id="c${profil.currentSeason.currentMatchday}">${profil.currentSeason.currentMatchday}</span> Matches<br>
-                                ${Utils.strtoDate(profil.currentSeason.startDate)} - ${Utils.strtoDate(profil.currentSeason.endDate)}
-                            </p>
-                        </div>`;
+                                <p class="teal-text">
+                                    <b>Current Session</b><br>
+                                    <span class="currmatch" id="c${data.currentSeason.currentMatchday}">${data.currentSeason.currentMatchday}</span> Matches<br>
+                                    ${Utils.strtoDate(data.currentSeason.startDate)} - ${Utils.strtoDate(data.currentSeason.endDate)}
+                                </p>
+                            </div>`;
 
-    document.getElementById('boxprofil').innerHTML = profilHtml;
+        document.getElementById('boxprofil').innerHTML = profilHtml;
 
-    inDB.saveMyFavorite('favclass', profil);
+        if (cekexist > 0) {
+            inDB.hapusFavourite('btnhapusfavliga', 'Liga');
+        } else {
+            inDB.saveMyFavorite('favclass', data);
+        }
+    };
+
+    // Sandingkan data indexedDB dan data API untuk menentukan tombol favorite
+    inDB.ambilIndexDB('Liga')
+        .then((dataligas) => writeHtml(profil, inDB.indbVsApi(dataligas, profil)));
 };
 
 const loadLeagueDetil = (idleague, typeclick = '') => {
@@ -331,4 +350,9 @@ const loadLeagueDetil = (idleague, typeclick = '') => {
         });
 };
 
-export default loadLeagueDetil;
+const leagueDetil = {
+    loadLeagueDetil,
+    writeLeagueProfilHtml,
+};
+
+export default leagueDetil;

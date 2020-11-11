@@ -7,66 +7,79 @@
 import SumberData from './data.js';
 import Utils from './utils.js';
 import inDB from './indb.js';
-import loadLeagueDetil from './component/leaguedetil.js';
+import leagueDetil from './component/leaguedetil.js';
 import clubDetil from './component/clubdetil.js';
-import loadPlayerDetil from './component/playerdetil.js';
+import playerDetil from './component/playerdetil.js';
 
-// 3d. Show Favorite Match Data From IndexDB
-const writeMatchProfilHtml = (datamatches = []) => {
-    let profilHtml = '';
+// 2d. Show Favorite Match Data From IndexDB
+const writeMatchProfilHtml = (datamatches) => {
+    const profilTxt = (data) => `<div class="card-panel teal-text card-border center-align boxspark boxhfav teal lighten-5">
+    <div class="boxdelfav">
+        <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatch" id="sx${data.id}">
+            <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
+        </a>
+    </div>
+    <h6><b>${data.competition.name}</b></h6>
 
-    datamatches.map((datamatch) => {
-        profilHtml += `<div class="card-panel teal-text card-border center-align boxspark boxhfav teal lighten-5">
-                        <div class="boxdelfav">
-                            <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatch" id="sx${datamatch.id}">
-                                <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
-                            </a>
-                        </div>
-                        <h6><b>${datamatch.competition.name}</b></h6>
-                        
-                        <table>
-                            <tr>
-                                <td>
-                                    <img src="https://crests.football-data.org/${datamatch.homeTeam.id}.svg" title="${datamatch.homeTeam.name}" width="35px" alt=""/>
-                                </td>
-                                <td>
-                                    ${datamatch.homeTeam.name}
-                                </td>
-                                <td>
-                                    ${datamatch.score.fullTime.homeTeam == null ? '-' : datamatch.score.fullTime.homeTeam}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="https://crests.football-data.org/${datamatch.awayTeam.id}.svg" title="${datamatch.awayTeam.name}" width="35px" alt=""/>
-                                </td>
-                                <td>
-                                    ${datamatch.awayTeam.name}
-                                </td>
-                                <td>
-                                    ${datamatch.score.fullTime.awayTeam == null ? '-' : datamatch.score.fullTime.awayTeam}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center-align" colspan="3">
-                                    ${datamatch.venue}<br>${Utils.strtoDate(datamatch.utcDate.substring(0, 10))}
-                                </td>
-                            </tr>
-                        </table>
-                        </div>
-                    `;
+    <table>
+        <tr>
+            <td>
+                <img src="https://crests.football-data.org/${data.homeTeam.id}.svg" title="${data.homeTeam.name}" width="35px" alt=""/>
+            </td>
+            <td>
+                ${data.homeTeam.name}
+            </td>
+            <td>
+                ${data.score.fullTime.homeTeam == null ? '-' : data.score.fullTime.homeTeam}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="https://crests.football-data.org/${data.awayTeam.id}.svg" title="${data.awayTeam.name}" width="35px" alt=""/>
+            </td>
+            <td>
+                ${data.awayTeam.name}
+            </td>
+            <td>
+                ${data.score.fullTime.awayTeam == null ? '-' : data.score.fullTime.awayTeam}
+            </td>
+        </tr>
+        <tr>
+            <td class="center-align" colspan="3">
+                ${data.venue}<br>${Utils.strtoDate(data.utcDate.substring(0, 10))}
+            </td>
+        </tr>
+    </table>
+    </div>`;
+
+    const writeData = (profil, index) => {
+        if (index === 0) {
+            document.getElementById('boxfavmatch').innerHTML = profil;
+        } else {
+            document.getElementById('boxfavmatch').innerHTML += profil;
+        }
+
+        inDB.hapusFavourite('btnhapusfavmatch', 'Pertandingan');
+    };
+
+    datamatches.map((datamatch, index) => {
+        if (datamatch.status === 'FINISHED' || datamatch.status === 'AWARDED') {
+            writeData(profilTxt(datamatch), index);
+        } else {
+            Utils.circleLoader('block');
+            SumberData.ambilData(`/v2/matches/${datamatch.id}`)
+                .then((data) => writeData(profilTxt(data.match), index))
+                .catch((error) => Utils.loadError(error))
+                .finally(() => Utils.circleLoader('none'));
+        }
     });
 
     if (datamatches.length > 0) {
-        document.getElementById('boxfavmatch').innerHTML = profilHtml;
-
-        inDB.hapusFavourite('btnhapusfavmatch', 'Pertandingan');
-
         console.log('Sukses Mengambil Data Pertandingan Favorite dari IndexedDB');
     }
 };
 
-// 3c. Show Favorite Plater Data From IndexDB
+// 2c. Show Favorite Player Data From IndexDB
 const writePlayerProfilHtml = (dataplayers = []) => {
     let profilHtml = '';
 
@@ -92,7 +105,7 @@ const writePlayerProfilHtml = (dataplayers = []) => {
     if (dataplayers.length > 0) {
         document.getElementById('boxfavplayer').innerHTML = profilHtml;
 
-        Utils.getDetil('btndetilpemain', loadPlayerDetil);
+        Utils.getDetil('btndetilpemain', playerDetil.loadPlayerDetil);
 
         inDB.hapusFavourite('btnhapusfavpemain', 'Pemain');
 
@@ -100,7 +113,7 @@ const writePlayerProfilHtml = (dataplayers = []) => {
     }
 };
 
-// 3b. Show Favorite Team Data From IndexDB
+// 2b. Show Favorite Team Data From IndexDB
 const writeTeamProfilHtml = (dataclubs = []) => {
     let profilHtml = '';
 
@@ -132,7 +145,7 @@ const writeTeamProfilHtml = (dataclubs = []) => {
     }
 };
 
-// 3a. Show Favorite League Data From IndexDB
+// 2a. Show Favorite League Data From IndexDB
 const writeLeagueProfilHtml = (dataligas = []) => {
     let profilHtml = '';
 
@@ -156,7 +169,7 @@ const writeLeagueProfilHtml = (dataligas = []) => {
     if (dataligas.length > 0) {
         document.getElementById('boxfavleague').innerHTML = profilHtml;
 
-        Utils.getDetil('btndetilkompetisi', loadLeagueDetil);
+        Utils.getDetil('btndetilkompetisi', leagueDetil.loadLeagueDetil);
 
         inDB.hapusFavourite('btnhapusfavliga', 'Liga');
 
@@ -168,29 +181,25 @@ const loadMyPage = () => {
     // 1. Load Page Skeleton
     SumberData.ambilKonten('../pages/mypages.html', 'body-content')
         .then(() => {
-            // 2. Show Circle PreLoader Before Fill Page
-            Utils.circleLoader('block');
-
-            // 3a. Get Favorite League Data From IndexDB
+            // 2a. Get Favorite League Data From IndexDB
             inDB.ambilIndexDB('Liga')
                 .then((dataligas) => writeLeagueProfilHtml(dataligas))
                 .catch((error) => Utils.loadError(error));
 
-            // 3b. Get Favorite Team Data From IndexDB
+            // 2b. Get Favorite Team Data From IndexDB
             inDB.ambilIndexDB('Klub')
                 .then((dataclubs) => writeTeamProfilHtml(dataclubs))
                 .catch((error) => Utils.loadError(error));
 
-            // 3c. Get Favorite Team Data From IndexDB
+            // 2c. Get Favorite Team Data From IndexDB
             inDB.ambilIndexDB('Pemain')
                 .then((dataplayers) => writePlayerProfilHtml(dataplayers))
                 .catch((error) => Utils.loadError(error));
 
-            // 3d. Get Favorite Match Data From IndexDB
+            // 2d. Get Favorite Match Data From IndexDB
             inDB.ambilIndexDB('Pertandingan')
                 .then((datamatches) => writeMatchProfilHtml(datamatches))
-                .catch((error) => Utils.loadError(error))
-                .finally(() => Utils.circleLoader('none'));
+                .catch((error) => Utils.loadError(error));
         });
 };
 

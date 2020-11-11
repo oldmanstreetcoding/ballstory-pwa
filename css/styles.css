@@ -31,6 +31,7 @@ body {
 .imgliga {
     height: 100%;
     width: 100%;
+    object-fit: contain;
 }
 
 .judul-halaman{
@@ -88,13 +89,13 @@ body {
 }
 
 .text-titlefav {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .boxisifavorite {
     height: 42vh;
     overflow-y: scroll;
-    padding: 0px 10px 10px 10px;
+    padding: 0 10px 10px 10px;
 }
 
 .imglogo {
@@ -149,7 +150,7 @@ body {
 
 #boxsidemenu {
     border: 1px solid salmon;
-    padding: 0px 20px 20px 20px;
+    padding: 0 20px 20px 20px;
     border-radius: 5px;
     color: teal;
     font-weight: bold;
@@ -165,7 +166,7 @@ body {
 
 .dvd-menu {
     border: 1px dashed grey;
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 #imgfab {

@@ -8,7 +8,7 @@
 /* eslint-disable import/extensions */
 import SumberData from './data.js';
 import Utils from './utils.js';
-import loadLeagueDetil from './component/leaguedetil.js';
+import leagueDetil from './component/leaguedetil.js';
 
 // tampilkan chard list liga di bawah mapchart
 const writeLeagueHtml = (leaguedatas = []) => {
@@ -59,7 +59,7 @@ const writeLeagueHtml = (leaguedatas = []) => {
 
     document.getElementById('boxlistliga').innerHTML = listliga;
 
-    Utils.getDetil('btndetilkompetisi', loadLeagueDetil);
+    Utils.getDetil('btndetilkompetisi', leagueDetil.loadLeagueDetil);
 };
 
 // Buat MapChart menggunakan library amChart
@@ -112,7 +112,7 @@ const loadMapChart = () => {
 
     pin.events.on('hit', (event) => {
         const pilihliga = event.target._dataItem._dataContext.title;
-        loadLeagueDetil(Utils.refLiga[pilihliga].id, 'pin');
+        leagueDetil.loadLeagueDetil(Utils.refLiga[pilihliga].id, 'pin');
     });
 
     pin.tooltipText = '{title}';
