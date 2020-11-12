@@ -73,7 +73,7 @@ workbox.precaching.precacheAndRoute([
 });
 
 workbox.routing.registerRoute(
-    ({ url }) => url.origin === 'https://api.football-data.org',
+    new RegExp('https://api.football-data.org/v2/'),
     workbox.strategies.staleWhileRevalidate({
         cacheName: 'api-story',
         plugins: [
