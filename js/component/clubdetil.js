@@ -18,11 +18,11 @@ const writeTeamInfoHtml = (data, info) => {
         data.matches.map((match, index) => {
             let strvs = '';
             if (match.status === 'FINISHED' || match.status === 'AWARDED') {
-                strvs = `FT<br>${match.score.fullTime.homeTeam} - ${match.score.fullTime.awayTeam}`;
+                strvs = `FT<br>${match.score.fullTime.homeTeam} - ${match.score.fullTime.awayTeam}<br><small class="hide-on-med-and-up">${Utils.strtoDate(match.utcDate.substring(0, 10))}</small>`;
             } else if (match.status === 'IN_PLAY') {
-                strvs = `LIVE<br>${match.score.fullTime.homeTeam} - ${match.score.fullTime.awayTeam}`;
+                strvs = `LIVE<br>${match.score.fullTime.homeTeam} - ${match.score.fullTime.awayTeam}<br><small class="hide-on-med-and-up">${Utils.strtoDate(match.utcDate.substring(0, 10))}</small>`;
             } else {
-                strvs = `NEXT<br><span class="hide-on-med-and-up">${Utils.strtoDate(match.utcDate.substring(0, 10))}</span>`;
+                strvs = `NEXT<br><small class="hide-on-med-and-up">${Utils.strtoDate(match.utcDate.substring(0, 10))}</small>`;
             }
 
             let divstrip = '';
@@ -85,7 +85,7 @@ const writeTeamInfoHtml = (data, info) => {
                 <td>
                     ${sq.position == null ? '-' : sq.position}
                     <small class="hide-on-med-and-up">
-                        ${Utils.stringToProper(sq.role)}
+                        <br>${Utils.stringToProper(sq.role)}
                     </small>
                 </td>
                 <td class="hide-on-small-only">

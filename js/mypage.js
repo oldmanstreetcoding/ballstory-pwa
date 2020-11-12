@@ -13,7 +13,10 @@ import playerDetil from './component/playerdetil.js';
 
 // 2d. Show Favorite Match Data From IndexDB
 const writeMatchProfilHtml = (datamatches) => {
-    const profilTxt = (data) => `<div class="card-panel teal-text card-border center-align boxspark boxhfav teal lighten-5">
+    const profilTxt = (data) => {
+        const dtglmatch = data.utcDate.split('T');
+
+        return `<div class="card-panel teal-text card-border center-align boxspark boxhfav teal lighten-5">
     <div class="boxdelfav">
         <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatch" id="sx${data.id}">
             <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
@@ -46,11 +49,12 @@ const writeMatchProfilHtml = (datamatches) => {
         </tr>
         <tr>
             <td class="center-align" colspan="3">
-                ${data.venue}<br>${Utils.strtoDate(data.utcDate.substring(0, 10))}
+                ${data.venue}<br><b>${Utils.strtoDate(dtglmatch[0])} ${dtglmatch[1].replace('Z', '')}</b>
             </td>
         </tr>
     </table>
     </div>`;
+    };
 
     const writeData = (profil, index) => {
         if (index === 0) {
@@ -97,7 +101,7 @@ const writePlayerProfilHtml = (dataplayers = []) => {
                             <span class="teal-text">
                                 ${Utils.strtoDate(dtgl[0])} (${Utils.calculateAge(dtgl[0])})<br>
                                 ${dataplayer.nationality}<br>
-                                ${dataplayer.position}
+                                <b>${dataplayer.position}</b>
                             </span>
                     </div>`;
     });
@@ -130,6 +134,7 @@ const writeTeamProfilHtml = (dataclubs = []) => {
                             ${dataclub.venue}<br>
                             ${dataclub.address}<br>
                             ${dataclub.phone}<br>
+                            ${dataclub.website}<br>
                         </span>
                     </div>`;
     });
