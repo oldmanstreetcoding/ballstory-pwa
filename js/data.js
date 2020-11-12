@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-undef */
 
-const baseURL = 'http://api.football-data.org';
+const baseURL = 'https://api.football-data.org';
 const token = {
     'X-Auth-Token': 'ad3d8a2bf95b421dbbda331a42376886',
 };
