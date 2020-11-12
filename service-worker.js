@@ -73,7 +73,7 @@ workbox.precaching.precacheAndRoute([
 workbox.routing.registerRoute(
     new RegExp('https://api.football-data.org/v2/'),
     workbox.strategies.staleWhileRevalidate({
-        cacheName: 'api-data',
+        cacheName: 'api-ballstory',
         plugins: [
             new workbox.cacheableResponse.Plugin({
                 statuses: [200],
