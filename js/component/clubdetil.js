@@ -34,25 +34,25 @@ const writeTeamInfoHtml = (data, info) => {
             const dtglmatch = match.utcDate.split('T');
 
             infoHtml += `
-                        <ul id="tx${match.id}" class="collapsible popout">
+                        <ul id="tx${match.id}" class="collapsible popout btndetilmatche">
                             <li>
                                 <div title="Klik untuk menampilkan detil pertandingan" class="row collapsible-header ${divstrip} card-panel card-border">
                                     <div class="col m2 center-align hide-on-small-only">
                                         ${Utils.strtoDate(dtglmatch[0])}<br>${dtglmatch[1].replace('Z', '')}
                                     </div>
-                                    <div class="col m2 right-align red-text hide-on-small-only btndetilteam" id="mx${match.homeTeam.id}">
+                                    <div class="col m2 right-align red-text hide-on-small-only btndetilteame btn-bs" id="mx${match.homeTeam.id}">
                                         ${match.homeTeam.name}
                                     </div>
-                                    <div class="col s5 m1 center-align btndetilteam" id="gx${match.homeTeam.id}" title="${match.homeTeam.name}">
+                                    <div class="col s5 m1 center-align btndetilteame btn-bs" id="gx${match.homeTeam.id}" title="${match.homeTeam.name}">
                                         <img src="https://crests.football-data.org/${match.homeTeam.id}.svg" width="35px" alt=""/>
                                         <small class="hide-on-med-and-up"><br>${match.homeTeam.name}</small>
                                     </div>
                                     <div class="col s4 m2 center-align">${strvs}</div>
-                                    <div class="col s5 m1 center-align btndetilteam" id="gx${match.awayTeam.id}" title="${match.awayTeam.name}">
+                                    <div class="col s5 m1 center-align btndetilteame btn-bs" id="gx${match.awayTeam.id}" title="${match.awayTeam.name}">
                                         <img src="https://crests.football-data.org/${match.awayTeam.id}.svg" width="35px" alt=""/>
                                         <small class="hide-on-med-and-up"><br>${match.awayTeam.name}</small>
                                     </div>
-                                    <div class="col m2 left-align red-text hide-on-small-only btndetilteam" id="mx${match.awayTeam.id}">
+                                    <div class="col m2 left-align red-text hide-on-small-only btndetilteame btn-bs" id="mx${match.awayTeam.id}">
                                         ${match.awayTeam.name}
                                     </div>
                                     <div class="col m2 center-align hide-on-small-only">Match ${match.matchday == null ? '' : match.matchday}<br>${match.competition.name}</div>
@@ -70,7 +70,7 @@ const writeTeamInfoHtml = (data, info) => {
             const dtgl = sq.dateOfBirth.split('T');
             squad += `<tr>
                 <td>
-                    <span class="teal-text btndetilpemain" id="ix${sq.id}">${sq.name}</span><br>
+                    <span class="teal-text btndetilpemaine btn-bs" id="ix${sq.id}">${sq.name}</span><br>
                     <small class="hide-on-med-and-up">
                         ${Utils.strtoDate(dtgl[0])} (${Utils.calculateAge(dtgl[0])})<br>
                         ${sq.nationality}
@@ -115,11 +115,11 @@ const writeTeamInfoHtml = (data, info) => {
     if (info === 'matches') {
         Utils.divCollapse('.collapsible.popout');
 
-        Utils.getDetil('collapsible', loadMatchDetil);
+        Utils.getDetil('btndetilmatche', loadMatchDetil);
 
-        Utils.getDetil('btndetilteam', loadTeamDetil, true);
+        Utils.getDetil('btndetilteame', loadTeamDetil, true);
     } else {
-        Utils.getDetil('btndetilpemain', playerDetil.loadPlayerDetil);
+        Utils.getDetil('btndetilpemaine', playerDetil.loadPlayerDetil);
     }
 };
 
@@ -162,11 +162,11 @@ const writeTeamProfilHtml = (teams) => {
         data.activeCompetitions.map((team) => {
             let btnliga = '';
             if (Utils.idLiga.indexOf(team.id) >= 0) {
-                btnliga = 'btndetilkompetisi';
+                btnliga = 'btndetilkompetisid';
             } else {
                 btnliga = '';
             }
-            activecomp += `<li class="teal-text collection-item ${btnliga}" id="tx${team.id}">${team.name}</li>`;
+            activecomp += `<li class="teal-text collection-item ${btnliga} btn-bs" id="tx${team.id}">${team.name}</li>`;
         });
 
         activecomp += '</ul>';
@@ -178,7 +178,7 @@ const writeTeamProfilHtml = (teams) => {
 
         let btnfav = '';
         if (cekexist > 0) {
-            btnfav = `<a title="Unsubscribe Info Terupdate Team" class="btn-floating btn-large red pulse favclass btnhapusfavteam" id="cx${data.id}">
+            btnfav = `<a title="Unsubscribe Info Terupdate Team" class="btn-floating btn-large red pulse favclass btnhapusfavteamd" id="cx${data.id}">
                         <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                     </a>`;
         } else {
@@ -207,10 +207,10 @@ const writeTeamProfilHtml = (teams) => {
 
         document.getElementById('boxprofil').innerHTML = profilHtml;
 
-        Utils.getDetil('btndetilkompetisi', leagueDetil.loadLeagueDetil);
+        Utils.getDetil('btndetilkompetisid', leagueDetil.loadLeagueDetil);
 
         if (cekexist > 0) {
-            inDB.hapusFavourite('btnhapusfavteam', 'Klub');
+            inDB.hapusFavourite('btnhapusfavteamd', 'Klub');
         } else {
             inDB.saveMyFavorite('favclass', data);
         }
@@ -231,9 +231,9 @@ const loadTeamDetil = (idteam) => {
             // 3. Get Data From Cache
             if ('caches' in window) {
                 SumberData.ambilCache(`/v2/teams/${idteam}`)
-                    // 4. Fill Page With Team Profil
+                // 4. Fill Page With Team Profil
                     .then((team) => writeTeamProfilHtml(team))
-                    // 5. Or Show Error
+                // 5. Or Show Error
                     .catch((error) => Utils.loadError(error));
             }
 

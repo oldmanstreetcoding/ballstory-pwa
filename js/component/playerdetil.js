@@ -38,7 +38,7 @@ const writePlayerProfilHtml = (playerdata) => {
 
         let btnfav = '';
         if (cekexist > 0) {
-            btnfav = `<a title="Unsubscribe Info Terupdate Pemain" class="btn-floating btn-large red pulse favclass btnhapusfavpemain" id="wx${data.id}">
+            btnfav = `<a title="Unsubscribe Info Terupdate Pemain" class="btn-floating btn-large red pulse favclass btnhapusfavpemainf" id="wx${data.id}">
                         <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                     </a>`;
         } else {
@@ -63,7 +63,7 @@ const writePlayerProfilHtml = (playerdata) => {
         document.getElementById('boxprofil').innerHTML = profilHtml;
 
         if (cekexist > 0) {
-            inDB.hapusFavourite('btnhapusfavpemain', 'Pemain');
+            inDB.hapusFavourite('btnhapusfavpemainf', 'Pemain');
         } else {
             inDB.saveMyFavorite('favclass', data);
         }

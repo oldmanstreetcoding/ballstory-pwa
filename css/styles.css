@@ -139,7 +139,7 @@ body {
     cursor: pointer;
 }
 
-.btndetilkompetisi:hover, .btndetilteam:hover, .btndetilpemain:hover {
+.btn-bs:hover{
     font-weight: bold;
     cursor: pointer;
 }

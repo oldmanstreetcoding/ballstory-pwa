@@ -68,9 +68,7 @@ workbox.precaching.precacheAndRoute([
     { url: '/assets/images/2019.png', revision: '1' },
     { url: '/assets/images/2021.png', revision: '1' },
     { url: '/assets/images/hero.png', revision: '1' },
-], {
-    ignoreUrlParametersMatching: [/.*/],
-});
+]);
 
 workbox.routing.registerRoute(
     new RegExp('https://api.football-data.org/v2/'),

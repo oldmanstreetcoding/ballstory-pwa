@@ -31,7 +31,7 @@ const writeLeagueHtml = (leaguedatas = []) => {
                             <div class="row">`;
 
         pecahliga[0].map((ligaA) => {
-            listliga += `<div class="col s6 m3 modal-trigger btndetilkompetisi" id="wx${ligaA.id}" data-target="boxmodal">
+            listliga += `<div class="col s6 m3 modal-trigger btn-bs btndetilkompetisia" id="wx${ligaA.id}" data-target="boxmodal">
                             <div class="card-panel card-border teal lighten-5 boxspark boxliga">
                                 <img class="imgliga" src="assets/images/${ligaA.id}.png" alt="${ligaA.name}"/>
                                 <p>${ligaA.area.name}</p>
@@ -45,7 +45,7 @@ const writeLeagueHtml = (leaguedatas = []) => {
                         <div class="row">`;
 
         pecahliga[1].map((ligaB) => {
-            listliga += `<div class="col s6 m3 modal-trigger btndetilkompetisi" id="wx${ligaB.id}" data-target="boxmodal">
+            listliga += `<div class="col s6 m3 modal-trigger btn-bs btndetilkompetisia" id="wx${ligaB.id}" data-target="boxmodal">
                             <div class="card-panel card-border teal lighten-5 boxspark boxliga">
                                 <img class="imgliga" src="assets/images/${ligaB.id}.png" alt="${ligaB.name}"/>
                                 <p>${ligaB.area.name}</p>
@@ -59,7 +59,7 @@ const writeLeagueHtml = (leaguedatas = []) => {
 
     document.getElementById('boxlistliga').innerHTML = listliga;
 
-    Utils.getDetil('btndetilkompetisi', leagueDetil.loadLeagueDetil);
+    Utils.getDetil('btndetilkompetisia', leagueDetil.loadLeagueDetil);
 };
 
 // Buat MapChart menggunakan library amChart

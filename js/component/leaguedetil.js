@@ -32,11 +32,11 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
 
         data.scorers.map((pemain) => {
             infoHtml += `<tr>
-                            <td><h6 class="teal-text btndetilpemain" id="sx${pemain.player.id}">${pemain.player.name}</h6><small class="btndetilteam hide-on-med-and-up teal-text" id="sx${pemain.team.id}">${pemain.player.nationality} / ${pemain.team.name}</small></td>
+                            <td><h6 class="teal-text btndetilpemaina btn-bs" id="sx${pemain.player.id}">${pemain.player.name}</h6><small class="btndetilteama btn-bs hide-on-med-and-up teal-text" id="sx${pemain.team.id}">${pemain.player.nationality} / ${pemain.team.name}</small></td>
                             <td class="hide-on-small-only">
                                 ${pemain.player.nationality}
                             </td>
-                            <td class="btndetilteam hide-on-small-only teal-text" id="sx${pemain.team.id}">
+                            <td class="btndetilteama btn-bs hide-on-small-only teal-text" id="sx${pemain.team.id}">
                                 ${pemain.team.name}
                             </td>
                             <td>
@@ -101,21 +101,21 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
             const dtglmatch = match.utcDate.split('T');
 
             infoHtml += `
-                        <ul id="lx${match.id}" class="collapsible popout">
+                        <ul id="lx${match.id}" class="collapsible popout btndetilmatcha">
                             <li>
                                 <div title="Klik untuk menampilkan detil pertandingan" class="row ${divstrip} collapsible-header card-panel card-border">
                                     <div class="col m2 center-align hide-on-small-only">${Utils.strtoDate(dtglmatch[0])}<br>${dtglmatch[1].replace('Z', '')}</div>
-                                    <div class="col m2 right-align hide-on-small-only red-text btndetilteam" id="mx${match.homeTeam.id}">${match.homeTeam.name}</div>
-                                    <div class="col s5 m2 center-align btndetilteam" id="gx${match.homeTeam.id}" title="${match.homeTeam.name}">
+                                    <div class="col m2 right-align hide-on-small-only red-text btndetilteama btn-bs" id="mx${match.homeTeam.id}">${match.homeTeam.name}</div>
+                                    <div class="col s5 m2 center-align btndetilteama btn-bs" id="gx${match.homeTeam.id}" title="${match.homeTeam.name}">
                                         <img src="https://crests.football-data.org/${match.homeTeam.id}.svg" width="35px" alt=""/>
                                         <small class="hide-on-med-and-up"><br>${match.homeTeam.name}</small>
                                     </div>
                                     <div class="col s4 m2 center-align">${strvs}</div>
-                                    <div class="col s5 m2 center-align btndetilteam" id="gx${match.awayTeam.id}" title="${match.awayTeam.name}">
+                                    <div class="col s5 m2 center-align btndetilteama btn-bs" id="gx${match.awayTeam.id}" title="${match.awayTeam.name}">
                                         <img src="https://crests.football-data.org/${match.awayTeam.id}.svg" width="35px" alt=""/>
                                         <small class="hide-on-med-and-up"><br>${match.awayTeam.name}</small>
                                     </div>
-                                    <div class="col m2 left-align hide-on-small-only red-text btndetilteam" id="mx${match.awayTeam.id}">${match.awayTeam.name}</div>
+                                    <div class="col m2 left-align hide-on-small-only red-text btndetilteama btn-bs" id="mx${match.awayTeam.id}">${match.awayTeam.name}</div>
                                 </div>
                                 <div class="collapsible-body center-align" id="c${match.id}">
                                     <h6 class="red-text">... Loading ...</h6>
@@ -145,11 +145,11 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
         data.standings[0].table.map((club) => {
             infoHtml += `<tr>
                                 <td>${club.position}</td>
-                                <td width="60px" class="btndetilteam" id="px${club.team.id}" title="${club.team.name}">
+                                <td width="60px" class="btndetilteama btn-bs" id="px${club.team.id}" title="${club.team.name}">
                                     <img src="${club.team.crestUrl}" width="30px" alt=""/>
                                     <small class="hide-on-med-and-up"><br>${club.team.name}</small>
                                 </td>
-                                <td class="btndetilteam" id="tx${club.team.id}"><span class="hide-on-small-only teal-text">${club.team.name}</span></td>
+                                <td class="btndetilteama btn-bs" id="tx${club.team.id}"><span class="hide-on-small-only teal-text">${club.team.name}</span></td>
                                 <td>${club.playedGames}</td>
                                 <td>${club.won}</td>
                                 <td>${club.draw}</td>
@@ -189,11 +189,11 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
             grup.table.map((club) => {
                 infoHtml += `<tr>
                                     <td>${club.position}</td>
-                                    <td class="btndetilteam" id="lx${club.team.id}" title="${club.team.name}">
+                                    <td class="btndetilteama btn-bs" id="lx${club.team.id}" title="${club.team.name}">
                                         <img src="${club.team.crestUrl}" width="30px" alt=""/>
                                         <small class="hide-on-med-and-up"><br>${club.team.name}</small>
                                     </td>
-                                    <td class="btndetilteam" id="cx${club.team.id}"><span class="hide-on-small-only teal-text">${club.team.name}</span></td>
+                                    <td class="btndetilteama btn-bs" id="cx${club.team.id}"><span class="hide-on-small-only teal-text">${club.team.name}</span></td>
                                     <td>${club.playedGames}</td>
                                     <td>${club.won}</td>
                                     <td>${club.draw}</td>
@@ -218,7 +218,7 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
     if (info === 'matches') {
         Utils.divCollapse('.collapsible.popout');
 
-        Utils.getDetil('collapsible', loadMatchDetil);
+        Utils.getDetil('btndetilmatcha', loadMatchDetil);
 
         const btnmatch = document.getElementsByClassName('btnothermatch');
         for (let i = 0; i < btnmatch.length; i++) {
@@ -227,10 +227,10 @@ const writeLeagueInfoHtml = (data, info, id, idmatch = null) => {
             });
         }
     } else if (info === 'scorers') {
-        Utils.getDetil('btndetilpemain', playerDetil.loadPlayerDetil);
+        Utils.getDetil('btndetilpemaina', playerDetil.loadPlayerDetil);
     }
 
-    Utils.getDetil('btndetilteam', clubDetil.loadTeamDetil, true);
+    Utils.getDetil('btndetilteama', clubDetil.loadTeamDetil, true);
 };
 
 const getLeagueInfoData = (id, info = '', idmatch = null) => {
@@ -272,7 +272,7 @@ const writeLeagueProfilHtml = (profil) => {
     const writeHtml = (data, cekexist) => {
         let btnfav = '';
         if (cekexist > 0) {
-            btnfav = `<a title="Unsubscribe Info Terupdate Liga" class="btn-floating btn-large red pulse favclass btnhapusfavliga" id="lx${data.id}">
+            btnfav = `<a title="Unsubscribe Info Terupdate Liga" class="btn-floating btn-large red pulse favclass btnhapusfavligac" id="lx${data.id}">
                         <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                     </a>`;
         } else {
@@ -297,7 +297,7 @@ const writeLeagueProfilHtml = (profil) => {
         document.getElementById('boxprofil').innerHTML = profilHtml;
 
         if (cekexist > 0) {
-            inDB.hapusFavourite('btnhapusfavliga', 'Liga');
+            inDB.hapusFavourite('btnhapusfavligac', 'Liga');
         } else {
             inDB.saveMyFavorite('favclass', data);
         }

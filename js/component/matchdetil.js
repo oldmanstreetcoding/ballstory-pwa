@@ -37,7 +37,7 @@ const writeMatchInfoHtml = (match, idmatch) => {
 
         let btnfav = '';
         if (cekexist > 0) {
-            btnfav = `<a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatch" id="sx${data.id}">
+            btnfav = `<a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatchf" id="sx${data.id}">
                         <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                     </a>`;
         } else {
@@ -109,7 +109,7 @@ const writeMatchInfoHtml = (match, idmatch) => {
         document.getElementById(`c${idmatch}`).innerHTML = infoMatchHtml;
 
         if (cekexist > 0) {
-            inDB.hapusFavourite('btnhapusfavmatch', 'Pertandingan');
+            inDB.hapusFavourite('btnhapusfavmatchf', 'Pertandingan');
         } else {
             inDB.saveMyFavorite('favclass', data);
         }

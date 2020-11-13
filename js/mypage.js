@@ -18,7 +18,7 @@ const writeMatchProfilHtml = (datamatches) => {
 
         return `<div class="card-panel teal-text card-border center-align boxspark boxhfav teal lighten-5">
     <div class="boxdelfav">
-        <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatch" id="sx${data.id}">
+        <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavmatchb" id="sx${data.id}">
             <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
         </a>
     </div>
@@ -63,7 +63,7 @@ const writeMatchProfilHtml = (datamatches) => {
             document.getElementById('boxfavmatch').innerHTML += profil;
         }
 
-        inDB.hapusFavourite('btnhapusfavmatch', 'Pertandingan');
+        inDB.hapusFavourite('btnhapusfavmatchb', 'Pertandingan');
     };
 
     datamatches.map((datamatch, index) => {
@@ -90,9 +90,9 @@ const writePlayerProfilHtml = (dataplayers = []) => {
     dataplayers.map((dataplayer) => {
         const dtgl = dataplayer.dateOfBirth.split('T');
 
-        profilHtml += `<div data-target="boxmodal" class="card-panel modal-trigger card-border center-align boxspark btndetilpemain boxhfav teal lighten-5" id="px${dataplayer.id}">
+        profilHtml += `<div data-target="boxmodal" class="card-panel modal-trigger card-border center-align boxspark btndetilpemainb btn-bs boxhfav teal lighten-5" id="px${dataplayer.id}">
                             <div class="boxdelfav">
-                                <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavpemain" id="wx${dataplayer.id}">
+                                <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavpemainb" id="wx${dataplayer.id}">
                                     <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                                 </a>
                             </div>
@@ -109,9 +109,9 @@ const writePlayerProfilHtml = (dataplayers = []) => {
     if (dataplayers.length > 0) {
         document.getElementById('boxfavplayer').innerHTML = profilHtml;
 
-        Utils.getDetil('btndetilpemain', playerDetil.loadPlayerDetil);
+        Utils.getDetil('btndetilpemainb', playerDetil.loadPlayerDetil);
 
-        inDB.hapusFavourite('btnhapusfavpemain', 'Pemain');
+        inDB.hapusFavourite('btnhapusfavpemainb', 'Pemain');
 
         console.log('Sukses Mengambil Data Pemain Favorite dari IndexedDB');
     }
@@ -122,9 +122,9 @@ const writeTeamProfilHtml = (dataclubs = []) => {
     let profilHtml = '';
 
     dataclubs.map((dataclub) => {
-        profilHtml += `<div data-target="boxmodal" class="card-panel modal-trigger card-border center-align boxspark btndetilteam boxhfav teal lighten-5" id="tx${dataclub.id}">
+        profilHtml += `<div data-target="boxmodal" class="card-panel modal-trigger card-border center-align boxspark btndetilteamb btn-bs boxhfav teal lighten-5" id="tx${dataclub.id}">
                         <div class="boxdelfav">
-                            <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavteam" id="cx${dataclub.id}">
+                            <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavteamb" id="cx${dataclub.id}">
                                 <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                             </a>
                         </div>
@@ -142,9 +142,9 @@ const writeTeamProfilHtml = (dataclubs = []) => {
     if (dataclubs.length > 0) {
         document.getElementById('boxfavteam').innerHTML = profilHtml;
 
-        Utils.getDetil('btndetilteam', clubDetil.loadTeamDetil);
+        Utils.getDetil('btndetilteamb', clubDetil.loadTeamDetil);
 
-        inDB.hapusFavourite('btnhapusfavteam', 'Klub');
+        inDB.hapusFavourite('btnhapusfavteamb', 'Klub');
 
         console.log('Sukses Mengambil Data Klub Favorite dari IndexedDB');
     }
@@ -155,9 +155,9 @@ const writeLeagueProfilHtml = (dataligas = []) => {
     let profilHtml = '';
 
     dataligas.map((dataliga) => {
-        profilHtml += `<div data-target="boxmodal" class="card-panel modal-trigger card-border center-align boxspark btndetilkompetisi boxhfav teal lighten-5" id="wx${dataliga.id}">
+        profilHtml += `<div data-target="boxmodal" class="card-panel modal-trigger card-border center-align boxspark btndetilkompetisib btn-bs boxhfav teal lighten-5" id="wx${dataliga.id}">
                         <div class="boxdelfav">
-                            <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavliga" id="lx${dataliga.id}">
+                            <a title="Click to Unsubscribe" class="btn-floating btn-large red pulse btnhapusfavligab" id="lx${dataliga.id}">
                                 <img class="imglove" src="../../assets/icons/delete.svg" alt=""/>
                             </a>
                         </div>
@@ -174,9 +174,9 @@ const writeLeagueProfilHtml = (dataligas = []) => {
     if (dataligas.length > 0) {
         document.getElementById('boxfavleague').innerHTML = profilHtml;
 
-        Utils.getDetil('btndetilkompetisi', leagueDetil.loadLeagueDetil);
+        Utils.getDetil('btndetilkompetisib', leagueDetil.loadLeagueDetil);
 
-        inDB.hapusFavourite('btnhapusfavliga', 'Liga');
+        inDB.hapusFavourite('btnhapusfavligab', 'Liga');
 
         console.log('Sukses Mengambil Data Liga Favorite dari IndexedDB');
     }

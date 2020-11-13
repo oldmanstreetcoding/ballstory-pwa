@@ -44,6 +44,7 @@ const closeModal = () => {
         btnclosemodal[i].addEventListener('click', () => {
             getModal().close();
             document.body.style.overflow = '';
+            document.getElementById('boxmodal').innerHTML = '';
         });
     }
 };
